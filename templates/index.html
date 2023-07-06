@@ -1,0 +1,147 @@
+{% extends "base.html"  %}
+{% load static %}
+
+{% block link %}
+<link rel="shortcut icon" href="{% static "image/favicon.ico" %}">
+<link rel="stylesheet" href="{% static "css/common.css" %}">
+<link rel="stylesheet" href="{% static "css/index.css" %}">
+{% endblock %}
+
+{% block body %}
+<body class="index">
+	<div class="header">
+		<a href="/" class="logo"><img src="{% static "image/logo.png" %}"></a>
+		<div class="search-box">
+	    <form id="searchForm" action="{% url 'search:search' 1 %}" method="post">
+            {% csrf_token %}
+	        <div class="search-keyword">
+	            <input name="kword" type="text" class="keyword" maxlength="120">
+	        </div>
+	        <input id="subSerch" type="submit" class="search-button" value="搜 索">
+	    </form>
+	    <div id="suggest" class="search-suggest"></div>
+  		<div class="search-hot-words">
+			{% for s in hot_search  %}
+				<a target="play" href="{% url 'play:play' s.song.id %}">{{ s.song.name }}</a>
+			{% endfor  %}
+  		</div>
+  	</div>
+	</div>
+	<div class="nav-box">
+    <div class="nav-box-inner">
+        <ul class="nav clearfix">
+            <li><a href="{% url 'index:index' %}">首页</a></li>
+            <li><a href="{% url 'ranking:ranking' %}" target="_blank">歌曲排行</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'user:user' %}" target="_blank">用户：{{ user.username }}</a></li>
+            {% else %}
+                <li><a href={% url 'user:login' %}>未登录</a></li>
+            {% endif %}
+        </ul>
+        <div class="category-nav">
+            <div class="category-nav-header">
+                <strong><a href="javascript:;" title="">音乐分类</a></strong>
+            </div>
+            <div class="category-nav-body">
+                <div id="J_CategoryItems" class="category-items">
+                {% for l in labels %}
+                    <div class="item" data-index="1">
+                        <h3><a href="{% url 'ranking:ranking' %}?type={{ l.id }}">{{ l.name }}</a></h3>
+                    </div>
+                {% endfor  %}
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="wrapper clearfix">
+		<div class="main">
+			<div id="J_FocusSlider" class="focus">
+				<div id="bannerLeftBtn" class="banner_btn"></div>
+				<ul class="focus-list f_w">
+                    <li class="f_s"><a target="play" href="{% url 'play:play' 12 %}" class="layz_load" >
+                        <img data-src="{% static 'image/datu-1.jpg' %}" width="750" height="275"></a>
+                    </li>
+					<li class="f_s"><a target="play" href="{% url 'play:play' 13 %}" class="layz_load" >
+                        <img data-src="{% static 'image/datu-2.jpg' %}" width="750" height="275"></a>
+                    </li>
+                    <li class="f_s"><a target="play" href="{% url 'play:play' 15 %}" class="layz_load" >
+                        <img data-src="{% static 'image/datu-3.jpg' %}" width="750" height="275"></a>
+                    </li>
+                    <li class="f_s"><a target="play" href="{% url 'play:play' 16 %}" class="layz_load" >
+                        <img data-src="{% static 'image/datu-4.jpg' %}" width="750" height="275"></a>
+                    </li>
+				</ul>
+				<div id="bannerRightBtn" class="banner_btn"></div>
+			</div>
+		</div>
+		<div class="aside">
+			<h2>热门歌曲</h2>
+			<ul>
+				{% for p in popular_songs %}
+					<li><span>{{ forloop.counter }}</span>
+                        <a target="play" href="{% url 'play:play' p.song.id %}">{{ p.song.name }}</a>
+                    </li>
+				{% endfor  %}
+			</ul>
+		</div>
+	</div>
+	<div class="today clearfix">
+		<div class="today-header">
+            <i></i>
+			<h2>新歌推荐</h2>
+		</div>
+		<div class="today-list-box slide">
+			<div id="J_TodayRec" class="today-list">
+				<ul>
+                {% for r in recommend %}
+                    <li>
+                    <a class="pic layz_load pic_po" target="play" href="{% url 'play:play' r.id %}">
+                        <img data-src="{{ r.image.url }}">
+                    </a>
+                    <div class="name">
+                        <h3><a target="play" href="{% url 'play:play' r.id %}" >{{ r.name }}</a></h3>
+                        <div class="singer"><span>{{ r.singer }}</span></div>
+                        <div class="times">发行时间：<span>{{ r.release |date:"Y-m-d" }}</span></div>
+                    </div>
+                    <a target="play" href="{% url 'play:play' r.id %}" class="today-buy-button" >去听听></a>
+                    </li>
+                {% endfor  %}
+				</ul>
+			</div>
+		</div>
+	</div><!--end today-->
+	<div class="section">
+		<ul id="J_Tab" class="tab-trigger">
+	  	<li data-cur="0" class="current t_c">热门搜索</li>
+        <li data-cur="1" class="t_c">热门下载</li>
+		</ul>
+		<div class="tab-container">
+	    <div id="J_Tab_Con" class="tab-container-cell">
+            {% for tab in tabs %}
+                {% if forloop.first %}
+                    <ul class="product-list clearfix t_s current">
+                {% else %}
+                    <ul class="product-list clearfix t_s" style="display:none;">
+                {% endif %}
+                    {% for item in tab %}
+                    <li>
+                        <a target="play" href="{% url 'play:play' item.song.id %}" class="pic layz_load pic_po" >
+                            <img data-src="{{ item.song.image.url }}" ></a>
+                        <h3><a target="play" href="{% url 'play:play' item.song.id %}" >{{ item.song.name }}</a></h3>
+                        <div class="singer"><span>{{ item.song.singer }}</span></div>
+                        {% if tabs.0  == tab %}
+                        <div class="times">搜索次数：<span>{{ item.search }}</span></div>
+                        {% else %}
+                        <div class="times">下载次数：<span>{{ item.download }}</span></div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                    </ul>
+            {% endfor %}
+        </div>
+        </div>
+    </div><!--end section-->
+	</div>
+	<script data-main="{% static "js/index.js" %}" src="{% static "js/require.js" %}"></script>
+</body>
+{% endblock %}

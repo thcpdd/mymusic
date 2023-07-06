@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block link %}
+    <link rel="shortcut icon" href="{% static "image/favicon.ico" %}">
+    <link rel="stylesheet" href="{% static "css/common.css" %}">
+    <link rel="stylesheet" href="{% static "css/register.css" %}">
+{% endblock %}
+
+{% block body %}
+    <body class="review">
+    <div class="wrapper">
+        <div class="header clearfix">
+            <span class="logo-tip">Hi,我的音乐欢迎您!</span>
+            <a href={% url 'index:index' %}><img src={% static 'image/logo.png' %}></a>
+        </div>
+
+        <div class="content clearfix">
+            <div id="unauth_main" class="login-regist">
+                <div class="login-box switch_box" style="display:block;">
+                    <div class="title">用户注册</div>
+                    <form id="loginForm" class="formBox" action="" method="post">
+                        {% csrf_token %}
+                        <div class="itembox user-name">
+                            <div class="item">
+                                <input type="text" name="username" placeholder="请输入用户名" class="txt tabInput">
+                            </div>
+                        </div>
+                        <div class="itembox user-pwd">
+                            <div class="item">
+                                <input type="text" name="mobile" placeholder="请输入手机号" class="txt tabInput">
+                            </div>
+                        </div>
+                        <div class="itembox user-pwd">
+                            <div class="item">
+                                <input type="password" name="password1" placeholder="请输入密码" class="txt tabInput">
+                            </div>
+                        </div>
+                        <div class="itembox user-pwd">
+                            <div class="item">
+                                <input type="password" name="password2" placeholder="再次输入密码" class="txt tabInput">
+                            </div>
+                        </div>
+                        {% if tips %}
+                            <div>提示:<span>{{ tips }}</span></div>
+                        {% endif %}
+                        <div id="loginBtnBox" class="login-btn">
+                            <input id="J_LoginButton" type="submit" value="注  册" class="tabInput pass-btn"/>
+                        </div>
+                        <div class="pass-reglink">
+                            已经有账号了？
+                            <a class="switch" href={% url 'user:login' %}>登录</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}

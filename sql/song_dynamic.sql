@@ -1,0 +1,15 @@
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (1, 1, 1, 1, 1);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (2, 5, 7, 2, 7);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (3, 4, 3, 0, 5);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (4, 13, 13, 4, 3);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (5, 5, 0, 0, 2);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (6, 5, 13, 5, 8);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (7, 107, 34, 45, 14);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (8, 46, 10, 2, 15);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (9, 85, 65, 12, 16);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (10, 435, 87, 12, 17);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (11, 239, 80, 67, 18);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (12, 406, 54, 81, 19);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (13, 381, 164, 0, 4);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (14, 256, 79, 52, 20);
+INSERT INTO mymusic_db.song_dynamic (id, plays, search, download, song_id) VALUES (15, 4, 0, 0, 13);

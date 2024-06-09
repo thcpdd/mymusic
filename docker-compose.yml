@@ -6,14 +6,14 @@ services:
     restart: always
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
     environment:
-      MYSQL_DATABASE: mymusic
-      MYSQL_ROOT_PASSWORD: f5c4fad26817a282
+      MYSQL_DATABASE: mymusic_db
+      MYSQL_ROOT_PASSWORD: yourpassword
     volumes:
       - ./sql:/sql_scripts/MyMusic
 
   web:
     build: .
-    command: bash -c "python3 ./wait_for_mysql.py db 3306 root f5c4fad26817a282 mymusic && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:9000"
+    command: bash -c "python3 ./wait_for_mysql.py db 3306 root yourpassword mymusic_db && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:9000"
     restart: always
     ports:
       - "9000:9000"

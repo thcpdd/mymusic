@@ -29,7 +29,7 @@
 2. 使用`docker`构建镜像
 
    ```bash
-   docker-compose up
+   sudo docker-compose up
    ```
 
 3. 接着访问`localhost:9000`即可看到页面。
@@ -37,7 +37,7 @@
 4. 先通过`Ctrl + C`退出当前状态，然后重新启动容器，让它们处于后台运行的状态
 
    ```bash
-   docker-compose up -d
+   sudo docker-compose up -d
    ```
 
 5. 到这里全部镜像都已经构建完毕，并且容器也已经启动，但是数据库里面只有对应的数据表，没有任何的数据，下一步我们需要同步`MySQL`中的数据。
@@ -63,12 +63,10 @@
 3. 进入命令行依次执行下列命令（中途可能需要输入密码）
 
    ```bash
-   mysql -u root -p mymusic < /sql_scripts/MyMusic/01_song_sort.sql
-   mysql -u root -p mymusic < /sql_scripts/MyMusic/02_song_info.sql
-   mysql -u root -p mymusic < /sql_scripts/MyMusic/03_song_dynamic.sql
+   mysql -u root -p mymusic_db < /sql_scripts/MyMusic/01_song_sort.sql
+   mysql -u root -p mymusic_db < /sql_scripts/MyMusic/02_song_info.sql
+   mysql -u root -p mymusic_db < /sql_scripts/MyMusic/03_song_dynamic.sql
    ```
-
-   
 
 
 

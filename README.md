@@ -3,7 +3,7 @@
 ## 介绍
 我的音乐Django项目，我的第一个完整的Django项目。
 
-访问地址：<a href="http://mymusic.rainbow.hi.cn">http://mymusic.rainbow.hi.cn</a>
+访问地址：<a href="https://mymusic.thcpdd.com">https://mymusic.thcpdd.com</a>
 
 项目完成时间：2023年5月24日
 
